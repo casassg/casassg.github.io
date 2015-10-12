@@ -81,7 +81,7 @@
 		width: 100%;
 	}
 
-		@media screen and (max-height: 640px) {
+		@media screen and (max-width: 900px) {
 
 			html, body {
 				height: auto;
@@ -146,6 +146,22 @@
 			}
 
 		}
+
+/*Custom*/
+
+.special_font {
+	font-family: "Trade Winds", Roboto, Verdana, monospace;
+}
+
+.to_right {
+	align-self: flex-end;
+}
+
+#tagline {
+	position: absolute;
+	right: 10px;
+	top: 5px;
+}
 
 /* BG */
 
@@ -748,7 +764,8 @@
 	input[type="password"],
 	input[type="email"],
 	select,
-	textarea {
+	textarea,
+	select.selectList option.selectOption {
 		-moz-appearance: none;
 		-webkit-appearance: none;
 		-ms-appearance: none;
@@ -973,7 +990,7 @@
 		input[type="button"]:hover,
 		button:hover,
 		.button:hover {
-			background-color: #1fcaa7;
+			background-color: #B71C1C;
 		}
 
 		input[type="submit"]:active,
@@ -981,7 +998,7 @@
 		input[type="button"]:active,
 		button:active,
 		.button:active {
-			background-color: #199e83;
+			background-color: #B71C1C;
 		}
 
 		input[type="submit"].disabled, input[type="submit"]:disabled,
@@ -1012,11 +1029,11 @@
 
 	#header h1 {
 		font-size: 3.25em;
-		margin: 0 0 0.55em 0;
+		margin: 0 0 0 0;
 	}
 
 	#header p {
-		font-size: 1.35em;
+		font-size: 1.00em;
 		line-height: 1.65em;
 	}
 
@@ -1068,13 +1085,14 @@
 			margin: 0 0 0 0;
 		}
 
-		@media screen and (max-width: 480px) {
+		@media screen and (max-width: 900px) {
 
 			#signup-form {
 				-moz-flex-direction: column;
 				-webkit-flex-direction: column;
 				-ms-flex-direction: column;
 				flex-direction: column;
+				margin-left: auto;
 			}
 
 				#signup-form input[type="type"],
@@ -1158,6 +1176,10 @@
 
 		}
 
+
+
+
+
 		@media screen and (max-width: 736px) {
 
 			#footer {
@@ -1176,7 +1198,7 @@
 
 		}
 
-		@media screen and (max-height: 640px) {
+		@media screen and (max-width: 900px) {
 
 			#footer {
 				bottom: auto;
@@ -1187,12 +1209,26 @@
 
 		}
 
-/*Custom*/
 
-		.special_font {
-			font-family: "Trade Winds",Roboto;
-		}
+@media screen and (max-width: 1020px) {
+	#tagline {
+		position: relative;
+		height: auto;
+		width: auto;
+		max-width: 300px;
+		max-height: 300px;
+	}
+}
 
-		.to_right {
-			align-self: flex-end;
-		}
+@media screen and (max-width: 860px) {
+	#header p {
+		font-size: 80%;
+	}
+}
+
+option {
+	color: black;
+}
+
+
+

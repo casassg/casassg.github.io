@@ -108,7 +108,7 @@
 		(function() {
 
 			// Vars.
-				var $form = document.querySelectorAll('#signup-form')[0],
+			var $form = document.querySelectorAll('#signup-form')[0],
 					$submit = document.querySelectorAll('#signup-form input[type="submit"]')[0],
 					$message;
 
@@ -141,8 +141,6 @@
 			// Note: If you're *not* using AJAX, get rid of this event listener.
 				$form.addEventListener('submit', function(event) {
 
-					event.stopPropagation();
-					event.preventDefault();
 
 					// Hide message.
 						$message._hide();
@@ -151,24 +149,37 @@
 						$submit.disabled = true;
 
 					// Process form.
-					// Note: Doesn't actually do anything yet (other than report back with a "thank you"),
-					// but there's enough here to piece together a working AJAX submission call that does.
-						window.setTimeout(function() {
 
-							// Reset form.
-								$form.reset();
+					var inputq1 = $('#genero').val();
+					var inputq2 = $('#evalua').val();
+					var inputq3 = $('#email').val();
+					var baseURL = 'https://docs.google.com/forms/d/1p0PN9jMvgCVseHFQvQ7Uo799bAS1BMnY5u2C7yZUiPw/formResponse?';
 
-							// Enable submit.
-								$submit.disabled = false;
+					var onSuccess = function() {
 
-							// Show message.
-								$message._show('success', 'Thank you!');
-								//$message._show('failure', 'Something went wrong. Please try again.');
+						// Reset form.
+						$form.reset();
 
-						}, 750);
+						// Enable submit.
+						$submit.disabled = false;
 
+						// Show message.
+						$message._show('success', 'Gracias!');
+						//$message._show('failure', 'Something went wrong. Please try again.');
+
+					};
+
+					var submitURL = baseURL + $.param({
+							'entry.224801458': inputq1,
+							'entry.1763776216': inputq2,
+							'entry.1407265780': inputq3,
+							'submit': 'Submit'
+						});
+
+					$(this)[0].action= submitURL;
+
+					onSuccess();
 				});
-
 		})();
 
 })();
