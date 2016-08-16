@@ -1,33 +1,37 @@
 <!DOCTYPE HTML>
 <!--
-	Aerial by HTML5 UP
-	html5up.net | @n33co
+	Identity by HTML5 UP
+	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
 	<head>
-		<title>@casassg</title>
+		<title>Casassg</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="shortcut icon" type="image/png" href="favicon.png"/>
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<!--[if lte IE 8]><script src="assets/js/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
-	<body class="loading">
-		<div id="wrapper">
-			<div id="bg"></div>
-			<div id="overlay"></div>
-			<div id="main">
+	<body class="is-loading">
 
-				<!-- Header -->
-					<header id="header">
-						<h1>Gerard Casas Saez</h1>
-						<p style="font-weight: 600;">Informatic engineering student at <a href="http://upc.edu">@BarcelonaTech</a>. World photographer, today reader. Never stop dreaming. </p>
-						<nav>
-							<ul>
-								<li><a target="_blank" href="http://twitter.com/casassaez" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<section id="main">
+						<header>
+							<span class="avatar"><img width="120em">//CASASSG//</img></span>
+							<h1>Gerard Casas Saez</h1>
+							<p>Computer Science student</p>
+						</header>
+						
+						<footer>
+							<ul class="icons">
+						<li><a target="_blank" href="http://twitter.com/casassaez" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 								<li><a target="_blank" href="https://es.linkedin.com/in/casassg" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
 								<li><a target="_blank" href="http://casassg.vsco.co/" class="icon fa-camera"><span class="label">VSCO Grid</span></a></li>
 								<li><a target="_blank" href="https://open.spotify.com/user/casassaez" class="icon fa-spotify"><span class="label">Spotify</span></a></li>
@@ -36,21 +40,26 @@
 								<li><a target="_blank" href="https://github.com/casassg" class="icon fa-github"><span class="label">Github</span></a></li>
 								<li><a target="_blank" href="https://bitbucket.org/casassg/" class="icon fa-bitbucket"><span class="label">Bitbucket</span></a></li>
 							</ul>
-						</nav>
-					</header>
+						</footer>
+					</section>
 
 				<!-- Footer -->
 					<footer id="footer">
-						<span class="copyright">&copy;casassg. Design by <a href="http://html5up.net">HTML5 UP</a>.</span>
+						<ul class="copyright">
+							<li>&copy; Casassg</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
 					</footer>
 
 			</div>
-		</div>
-		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-		<script>
-			window.onload = function() { document.body.className = ''; }
-			window.ontouchmove = function() { return false; }
-			window.onorientationchange = function() { document.body.scrollTop = 0; }
-		</script>
+
+		<!-- Scripts -->
+			<!--[if lte IE 8]><script src="assets/js/respond.min.js"></script><![endif]-->
+			<script>
+				if ('addEventListener' in window) {
+					window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-loading\b/, ''); });
+					document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+				}
+			</script>
+
 	</body>
 </html>
