@@ -1,2 +1,13 @@
-gems:
+name: Hey, I'm Gerard
+author: Gerard Casas Saez
+color: "#2B546B"
+twitter: casassaez
+description: Hey, my name is Gerard! MS student at the University of Colorado Boulder, hackathon organizer and occasional photographer.
+domain: gerard.space
+sass:
+    sass_dir: assets/_sass
+    style: compressed
+
+
+plugins:
   - jekyll-redirect-from
