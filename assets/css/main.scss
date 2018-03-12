@@ -40,6 +40,12 @@ body {
         text-decoration: none;
         color: inherit;
         font-weight: bold;
+        @include transition(0.5s ease);
+
+        &:hover {
+            color: rgba(white,0.8);
+        }
+
     }
 
     footer {
@@ -65,16 +71,26 @@ body {
         line-height: 2em;
         margin: 0 0 10px;
     }
+    header {
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 30%;
+            @include border-radius(50%);
+            @include box-shadow(0 0 2px 2px rgba(0,0,0,.2));
+        }
+    }
 }
 
 #page-wrapper {
     display: flex;
     align-items: center;
+    flex-direction: row;
     height: 100%;
     margin: 0 auto;
     #wrapper{
         display: flex;
-        flex-direction: row;
         position: relative;
         color: white;
         min-height: 30rem;
