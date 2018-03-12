@@ -1,2 +1,6 @@
-gems:
+sass:
+    sass_dir: assets/_sass
+    style: compressed
+
+plugins:
   - jekyll-redirect-from
