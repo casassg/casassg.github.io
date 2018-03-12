@@ -1,4 +1,4 @@
-# Hi, I'm Gerard
+# Gerard's personal website
 
 Oh, look, you found my repo for my personal website! There's not much interesting here. Feel free to use the theme for your website!
 
