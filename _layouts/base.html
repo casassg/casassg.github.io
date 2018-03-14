@@ -2,9 +2,8 @@
 
 <html>
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <meta name="theme-color" content="{{site.color}}">
     <meta name="author" content="{{ site.author }}">
     <link rel="icon" type="image/x-icon" href="favicon.ico"/>
@@ -17,41 +16,40 @@
     <meta property="og:title" content="{{ page.title | default: site.name}}"/>
     <meta property="og:site_name" content="{{ site.name }}"/>
     <meta property="og:description" content="{{ page.description | default: site.description }}"/>
-	<meta property="og:url" content="http://{{site.domain}}">
+    <meta property="og:url" content="http://{{site.domain}}">
 
     <!--TWITTER DESCRIPTION -->
-	<meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary">
     {% unless site.twitter  == null %}
-        <meta name="twitter:site" content="@{{ site.twitter }}">
-        <meta name="twitter:creator" content="@{{ site.twitter }}">
+      <meta name="twitter:site" content="@{{ site.twitter }}">
+      <meta name="twitter:creator" content="@{{ site.twitter }}">
     {% endunless %}
-	<meta name="twitter:title" content="{{ site.name }}">
-	<meta name="twitter:description" content="{{ page.description | default: site.description  }}">
-	<meta name="twitter:image" content="http://{{site.domain}}/{{ page.og | default: site.og  }}">
+    <meta name="twitter:title" content="{{ site.name }}">
+    <meta name="twitter:description" content="{{ page.description | default: site.description  }}">
+    <meta name="twitter:image" content="http://{{site.domain}}/{{ page.og | default: site.og  }}">
 
-	<link rel="stylesheet" href="assets/css/reset.css" />
-	<link href="https://fonts.googleapis.com/css?family=Roboto:300,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,500,700" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/main.css?_={{ site.time |  date: "%s" }}">
     <script src="https://use.fontawesome.com/516a64331f.js"></script>
 
-  
-
-
     <title>{% if page.title %}{{ page.title }} | {%endif%}{{ site.name }}</title>
-
-
 
 </head>
 <body>
-	<div id="page-wrapper">
+<div id="page-wrapper">
+   {{content}}
+</div>
+</div>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115745957-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-	
-
-			{{content}}
-
-
-	</div>
-	</div>
+  gtag('config', 'UA-115745957-1');
+</script>
 
 </body>
 </html>
