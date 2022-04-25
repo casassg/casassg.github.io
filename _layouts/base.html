@@ -7,15 +7,15 @@
     <meta name="theme-color" content="{{site.color}}">
     <meta name="author" content="{{ site.author }}">
     <link rel="icon" type="image/x-icon" href="favicon.ico"/>
-    <meta name="description" content="{{ page.description | default: site.description  }}">
-     <meta name="keywords" content="hackathons, computer science, gerard, boulder, "/>
+    <meta name="description" content="{{ page.description | default: site.description | strip_html  }}">
+     <meta name="keywords" content="gerard, boulder, engineer, personal website, gerard casas saez"/>
     <meta name="copyright" content="{{ site.author }}"/>
 
 
     <!--FACEBOOK DESCRIPTION -->
     <meta property="og:title" content="{{ page.title | default: site.title}}"/>
     <meta property="og:site_name" content="{{ site.title }}"/>
-    <meta property="og:description" content="{{ page.description | default: site.description }}"/>
+    <meta property="og:description" content="{{ page.description | default: site.description | strip_html }}"/>
     <meta property="og:url" content="http://{{site.domain}}">
 
     <!--TWITTER DESCRIPTION -->
@@ -25,8 +25,7 @@
       <meta name="twitter:creator" content="@{{ site.twitter }}">
     {% endunless %}
     <meta name="twitter:title" content="{{ site.title }}">
-    <meta name="twitter:description" content="{{ page.description | default: site.description  }}">
-    <meta name="twitter:image" content="http://{{site.domain}}/{{ page.og | default: site.og  }}">
+    <meta name="twitter:description" content="{{ page.description | default: site.description | strip_html }}">
 
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,500,700" rel="stylesheet">

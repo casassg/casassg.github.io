@@ -1,0 +1,15 @@
+- title: Twitter
+  link: http://twitter.com/casassaez
+  fa-icon: twitter
+- title: LinkedIn
+  link: https://linkedin.com/in/casassg
+  fa-icon: linkedin
+- title: Google Scholar
+  link: https://scholar.google.com/citations?user=88ulpIQAAAAJ&hl=en&oi=ao
+  fa-icon: graduation-cap
+- title: GitHub
+  link: http://github.com/casassg
+  fa-icon: github
+- title: Resume
+  link: /cv
+  fa-icon: file-text

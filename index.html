@@ -8,20 +8,14 @@ layout: base
 	<header>
 		<h1>{{site.title}}</h1>
 		<div class="separator"></div>
-		<p>I'm a software engineer. I'm specially interested in machine learning and data pipelines platforms. I graduated from  <a href="https://www.colorado.edu/" target="_blank">University of Colorado Boulder</a> in 2019. In my free time I like to ski, take pictures and read some books. Follow me on <a href="https://twitter.com/casassaez" target="_blank">Twitter</a> to stay updated on my latest adventures.</p>
+		<p>{{site.description}}</p>
 	</header>
 	
 	<footer>
 		<div class="icons">
-			<a target="_blank" href="http://twitter.com/casassaez" class="fa fa-3x fa-twitter"><span class="label">Twitter</span></a>
-			<a target="_blank" href="https://es.linkedin.com/in/casassg" class="fa fa-3x fa-linkedin"><span class="label">LinkedIn</span></a>
-			<a target="_blank" href="http://vsco.co/casassg/images/1" class="fa fa-3x fa-camera"><span class="label">Photo portfolio</span></a>
-			<a target="_blank" href="https://open.spotify.com/user/casassaez" class="fa fa-3x fa-spotify"><span class="label">Spotify</span></a>
-			<a target="_blank" href="https://scholar.google.com/citations?user=88ulpIQAAAAJ&hl=en&oi=ao" class="fa fa-3x fa-graduation-cap"><span class="label">Spotify</span></a>
-			<a target="_blank" href="https://medium.com/@casassg" class="fa fa-3x fa-medium"><span class="label">Medium</span></a>
-			<a target="_blank" href="https://github.com/casassg" class="fa fa-3x fa-github"><span class="label">Github</span></a>
-			<a target="_blank" href="/cv" class="fa fa-3x fa-file-text"><span class="label">Resume</span></a>
-			<a target="_blank" href="https://instagram.com/casassg" class="fa fa-3x fa-instagram"><span class="label">Instagram</span></a>
+			{% for social in site.data.social %}
+				<a target="_blank" href="{{social.link}}" class="fa fa-3x fa-{{social.fa-icon}}"><span class="label">{{social.title}}</span></a>
+			{% endfor %}
 		</div>
 	</footer>
 </section>
