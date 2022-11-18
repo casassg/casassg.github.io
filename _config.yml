@@ -8,6 +8,7 @@ description: |
   Follow me on <a href="https://twitter.com/casassaez" target="_blank">Twitter</a> to stay updated on my latest adventures.
 domain: gerard.space
 twitter: casassaez
+mastodon: macaw.social/@gerard
 sass:
     sass_dir: assets/_sass
     style: compressed
