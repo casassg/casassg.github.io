@@ -1,6 +1,10 @@
 - title: Twitter
   link: http://twitter.com/casassaez
   fa-icon: twitter
+- title: Mastodon
+  link: http://macaw.social/@gerard
+  fa-icon: mastodon
+  fa-brand: true
 - title: LinkedIn
   link: https://linkedin.com/in/casassg
   fa-icon: linkedin

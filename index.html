@@ -14,7 +14,7 @@ layout: base
 	<footer>
 		<div class="icons">
 			{% for social in site.data.social %}
-				<a target="_blank" href="{{social.link}}" class="fa fa-3x fa-{{social.fa-icon}}"><span class="label">{{social.title}}</span></a>
+				<a target="_blank" href="{{social.link}}" class="fa fa-3x fa-{{social.fa-icon}} {% if social.fa-brand %} fa-brands {% endif %}"><span class="label">{{social.title}}</span></a>
 			{% endfor %}
 		</div>
 	</footer>
