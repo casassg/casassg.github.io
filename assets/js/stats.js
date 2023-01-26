@@ -1,30 +1,84 @@
-function csvJSON(data){
-	var lines=data.split("\n");	
+function csvJSON(data) {
+	var items = []
+	var rows = data.split(/\n/g);
+	var firstRow = rows.shift()
+	var keys = firstRow.substring(0, firstRow.length - 1).split(",");
 
-	var result = [];
+	rows.forEach(raw_row => {
+		var row = {};
+		var columns = raw_row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
 
-	// NOTE: If your columns contain commas in their values, you'll need
-	// to deal with those before doing the next step 
-	// (you might convert them to &&& or something, then covert them back later)
-	// jsfiddle showing the issue https://jsfiddle.net/
-	var headers=lines[0].split(",");
+		columns.forEach((column, index) => {
 
-	for(var i=1;i<lines.length;i++){
+			var key = keys[index].replace(' ', '');
+			if (!key) return;
+			row[key] = column;
 
-		var obj = {};
-		var currentline=lines[i].split(",");
+		});
+		items.push(row);
+	});
 
-		for(var j=0;j<headers.length;j++){
-			obj[headers[j]] = currentline[j];
+	return items
+}
+
+function refreshStats() {
+	fetch('https://gerard.space/stats/strava.csv')
+		.then((response) => response.text())
+		.then((data) => writeStats(csvJSON(data)));
+
+}
+
+function writeText(id, text) {
+	document.getElementById(id).innerHTML = text
+}
+const DAYSAGO = 30;
+function writeStats(data) {
+	const lastActivity = data[data.length - 1]
+	writeText("activity", lastActivity["ActivityType"]);
+	const hours = (new Date().getTime() - new Date(lastActivity["ActivityTimeUTCISO"] + "Z").getTime()) / 1000 / 60 / 60;
+	var hourstring = hours < 1 ? "less than an hour ago" : Math.floor(hours) + " hours ago"
+
+	writeText("time_ago", hourstring)
+	writeText("days_ago", DAYSAGO)
+	var meters = 0.0;
+	var seconds = 0.0;
+	var count = 0;
+	const timeAgo = new Date().getTime() - (1000 * 60 * 60 * 24 * DAYSAGO)
+	for (let i = 0; i < data.length; i++) {
+		var act = data[i];
+		var date = new Date(act["ActivityTimeUTCISO"] + "Z").getTime()
+		if (date >= timeAgo) {
+
+			count += 1;
+			if (act["ActivityType"].includes("Run")) {
+				seconds += parseFloat(act["ElapsedSeconds"])
+				meters += parseFloat(act["DistanceMeters"])
+			}
 		}
-
-		result.push(obj);
+	}
+	writeText("count", count)
+	const kms = Math.round(meters / 1000);
+	writeText("run_kms", kms)
+	const speed = (seconds / 60) / (meters / 1000)
+	var speed_seconds = Math.round((speed % 1) * 60)
+	if (speed_seconds < 10) {
+		speed_seconds = "0" + speed_seconds
+	}
+	writeText("speed", Math.floor(speed) + ":" + speed_seconds)
 
 }
 
-//return result; //JavaScript object
-return result; //JSON
+function openStats() {
+	refreshStats()
+	document.getElementById("wrapper").classList.add("stats-active");
+
 }
-fetch('https://gerard.space/stats/strava.csv')
-  .then((response) => response.text())
-  .then((data) => console.log(csvJSON(data)));
+
+document.getElementById("stats_button").addEventListener("click", openStats);
+
+
+function closeStats() {
+	document.getElementById("wrapper").classList.remove("stats-active");
+}
+document.getElementById("close_stats").addEventListener("click", closeStats);
+refreshStats()

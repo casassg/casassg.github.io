@@ -13,6 +13,7 @@ body {
     display: flex;
     align-items: stretch;
     justify-content: flex-start;
+    perspective: 1000px;
     
     color: rgba(white, 0.75);
     font-family: "Roboto", Helvetica, sans-serif;
@@ -28,6 +29,17 @@ body {
         line-height: 1.3em;
     }
 
+    h2{
+        font-size: 2rem;
+        
+    }
+
+
+    h3{
+        font-size: 1rem;
+        font-style: italic;
+        line-height: 1em;
+    }
     h1, h2, h3, h4, h5, h6 {
         color: rgba(255, 255, 255, 0.875);
         font-family: "Roboto", Helvetica, sans-serif;
@@ -47,13 +59,19 @@ body {
         }
 
     }
+    b {
+        font-weight: bold;
+    }
 
     footer {
         .icons > a {
             color: rgba(white, 0.75);
             text-decoration: none;
             background-color: transparent;
-            padding: 0.4em;
+            padding-right: 0.8em;
+            padding-bottom: 0.2em;
+            padding-top: 0.3em;
+            padding-left: 0;
             @include transition(0.5s ease);
 
             &:hover {
@@ -94,18 +112,45 @@ body {
         position: relative;
         color: white;
         min-height: 30rem;
+        min-width:37.5rem;
         @include box-shadow(0 2rem 4rem 0.25rem rgba(46, 43, 55, 0.575));
         background: linear-gradient(45deg, #020913 0%,#00121E 19%,#001F3A 28%,#063651 56%,#2B546B 71%,#827C6C 100%);
         padding: 3.5rem 3.5rem 2rem 3.5rem;
         max-width: 37.5rem;
         width: 100%;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
         .separator {
               border-bottom: 1px solid rgba(255, 255, 255, 0.875);
               width: 100px;
               margin: 0 0 15px 0;
 
         }
+
     }
+    #wrapper.stats-active {
+        transform: rotateY(180deg);
+    }
+    #back {    
+        transform: rotateY(180deg);
+        .box {
+            display: flex;
+            flex-flow: row wrap;
+
+            div {
+                padding-right: 40px;
+                padding-bottom: 10px;
+            }
+        }
+    }
+    #main, #back {
+        position: absolute;
+        
+        width:37.5rem;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+    
 }
 
 
@@ -116,10 +161,15 @@ body {
         #wrapper {
             min-height: 100%;
             box-sizing: border-box;
+            min-width: 100vw;
 
+        }
+        #main, #back {
+            width: 70vw;
         }
 	}
 
+   
     .fa-3x {
         font-size: 2.3em !important;
     }
