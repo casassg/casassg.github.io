@@ -113,6 +113,7 @@ body {
         color: white;
         min-height: 30rem;
         min-width:37.5rem;
+        transform:rotateY(0deg);
         @include box-shadow(0 2rem 4rem 0.25rem rgba(46, 43, 55, 0.575));
         background: linear-gradient(45deg, #020913 0%,#00121E 19%,#001F3A 28%,#063651 56%,#2B546B 71%,#827C6C 100%);
         padding: 3.5rem 3.5rem 2rem 3.5rem;
@@ -131,6 +132,12 @@ body {
     #wrapper.stats-active {
         transform: rotateY(180deg);
     }
+    #main, #back {
+        position: absolute;
+        width:37.5rem;
+        @include backface-visibility(hidden);
+        transform: rotateX(0deg)
+    }
     #back {    
         transform: rotateY(180deg);
         .box {
@@ -143,13 +150,7 @@ body {
             }
         }
     }
-    #main, #back {
-        position: absolute;
-        
-        width:37.5rem;
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-    }
+
     
 }
 

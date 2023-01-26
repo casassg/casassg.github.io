@@ -49,6 +49,14 @@
   transform: translateX($px);
 }
 
+@mixin backface-visibility($viz) {
+  -webkit-backface-visibility: $viz;
+  -ms-backface-visibility: $viz;
+  -o-backface-visibility: $viz;
+  -moz-backface-visibility: $viz;
+  backface-visibility:$viz;
+}
+
 @mixin btn($color, $border-color, $cursor: pointer, $opacity: 1, $hover-fx: true) {
   cursor: $cursor;
   opacity: $opacity;
