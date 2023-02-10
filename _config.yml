@@ -12,7 +12,7 @@ mastodon: macaw.social/@gerard
 sass:
     sass_dir: assets/_sass
     style: compressed
-
+include: [".well-known"]
 
 plugins:
   - jekyll-redirect-from
