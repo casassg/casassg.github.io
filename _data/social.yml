@@ -1,9 +1,9 @@
 - title: Twitter
-  link: http://twitter.com/casassaez
+  link: https://twitter.com/casassaez
   fa-icon: twitter
-- title: Mastodon
-  link: http://macaw.social/@gerard
-  fa-icon: mastodon
+- title: Threads
+  link: https://threads.net/@casassg
+  fa-icon: threads
   fa-brand: true
 - title: LinkedIn
   link: https://linkedin.com/in/casassg
@@ -12,7 +12,7 @@
   link: https://scholar.google.com/citations?user=88ulpIQAAAAJ&hl=en&oi=ao
   fa-icon: graduation-cap
 - title: GitHub
-  link: http://github.com/casassg
+  link: https://github.com/casassg
   fa-icon: github
 - title: Resume
   link: /cv
