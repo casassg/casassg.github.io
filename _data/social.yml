@@ -1,19 +1,22 @@
-- title: Twitter
-  link: https://twitter.com/casassaez
-  fa-icon: twitter
+
 - title: Threads
   link: https://threads.net/@casassg
   fa-icon: threads
   fa-brand: true
-- title: LinkedIn
-  link: https://linkedin.com/in/casassg
-  fa-icon: linkedin
-- title: Google Scholar
-  link: https://scholar.google.com/citations?user=88ulpIQAAAAJ&hl=en&oi=ao
-  fa-icon: graduation-cap
 - title: GitHub
   link: https://github.com/casassg
   fa-icon: github
+- title: Twitter
+  link: https://twitter.com/casassaez
+  fa-icon: x-twitter
+  fa-brand: true
+- title: Instagram 
+  link: https://instagram.com/casassg
+  fa-icon: instagram
+  fa-brand: true
+- title: LinkedIn
+  link: https://linkedin.com/in/casassg
+  fa-icon: linkedin
 - title: Resume
   link: /cv
   fa-icon: file-text
