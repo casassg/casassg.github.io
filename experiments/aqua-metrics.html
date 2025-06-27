@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aqua-Metrics | High-Precision Bathymetric Data</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f7f7f8;
+            --text-color: #1a1a1a;
+            --subtle-text-color: #666666;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --accent-blue: #3b82f6;
+            --accent-blue-light: #eff6ff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .section-glow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 100%;
+            border-radius: 50%;
+            background-image: radial-gradient(circle, rgba(60, 130, 246, 0.1), transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .grid-bg {
+             background-image: linear-gradient(var(--border-color) 1px, transparent 1px), linear-gradient(to right, var(--border-color) 1px, transparent 1px);
+             background-size: 4rem 4rem;
+        }
+
+        /* --- Scroll Animations --- */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.215, 0.610, 0.355, 1), transform 0.8s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Card Styles --- */
+        .modern-card {
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03), 0 2px 4px -2px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+        
+        .modern-card:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -4px rgba(0,0,0,0.05);
+        }
+
+        /* Parallax effect element */
+        .parallax-bg {
+            transition: transform 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+        
+        /* Spinner animation */
+        .loader {
+            border: 4px solid rgba(0,0,0,0.1);
+            border-top: 4px solid var(--accent-blue);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-white/70 backdrop-blur-md fixed top-0 left-0 right-0 z-50 border-b border-black/10 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#" class="text-xl font-bold text-gray-900">
+                    <span class="text-blue-600">Aqua</span>-Metrics
+                </a>
+                <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                    <a href="#services" class="text-gray-600 hover:text-black transition-colors">Services</a>
+                    <a href="#use-cases" class="text-gray-600 hover:text-black transition-colors">Use Cases</a>
+                    <a href="#ai-assistant" class="text-gray-600 hover:text-black transition-colors">AI Assistant</a>
+                    <a href="#testimonials" class="text-gray-600 hover:text-black transition-colors">Testimonials</a>
+                </nav>
+                <a href="#contact" class="hidden md:inline-block bg-gray-900 text-white font-medium text-sm py-2 px-4 rounded-lg hover:bg-black transition-colors">
+                    Contact Sales
+                </a>
+                <button id="mobile-menu-button" class="md:hidden text-gray-800">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-black/10">
+            <a href="#services" class="mobile-menu-link block py-3 px-6 text-sm text-gray-700 hover:bg-gray-100">Services</a>
+            <a href="#use-cases" class="mobile-menu-link block py-3 px-6 text-sm text-gray-700 hover:bg-gray-100">Use Cases</a>
+            <a href="#ai-assistant" class="mobile-menu-link block py-3 px-6 text-sm text-gray-700 hover:bg-gray-100">AI Assistant</a>
+            <a href="#testimonials" class="mobile-menu-link block py-3 px-6 text-sm text-gray-700 hover:bg-gray-100">Testimonials</a>
+            <a href="#contact" class="mobile-menu-link block py-3 px-6 text-sm text-gray-700 hover:bg-gray-100">Contact</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-24 md:pt-32">
+        <!-- Hero Section -->
+        <section class="relative min-h-[70vh] flex items-center text-center overflow-hidden grid-bg">
+            <div class="absolute inset-0 section-glow"></div>
+            <div class="container mx-auto px-6 z-10">
+                <h1 class="text-5xl md:text-7xl font-bold tracking-tighter mb-6 reveal-on-scroll">Charting the Depths</h1>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 text-subtle-text-color reveal-on-scroll" style="transition-delay: 150ms;">High-resolution bathymetric data to power the future of marine industries. We transform complex seafloor data into clear, actionable insights.</p>
+                <div class="reveal-on-scroll" style="transition-delay: 300ms;">
+                    <a href="#ai-assistant" class="bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg text-base hover:bg-blue-700 transition-transform hover:scale-105 inline-block">
+                        Plan Your Project
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases / Parallax Section -->
+        <section id="use-cases" class="py-24">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter reveal-on-scroll">The Foundation for Critical Operations</h2>
+                    <p class="text-lg mt-4 text-subtle-text-color max-w-2xl mx-auto reveal-on-scroll" style="transition-delay: 150ms;">Our data underpins success across diverse and demanding sectors.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                    <!-- Images with parallax effect -->
+                    <div class="col-span-1 pt-12">
+                        <img src="https://placehold.co/600x800/3652ad/ffffff?text=Energy" alt="Offshore Wind Farm" class="parallax-bg rounded-xl shadow-lg" data-speed="0.9">
+                    </div>
+                     <div class="col-span-1">
+                        <img src="https://placehold.co/600x800/2880a8/ffffff?text=Navigation" alt="Cargo Ship" class="parallax-bg rounded-xl shadow-lg" data-speed="1.1">
+                    </div>
+                     <div class="col-span-1 pt-12">
+                        <img src="https://placehold.co/600x800/2d8b8b/ffffff?text=Coastal" alt="Coastal Zone" class="parallax-bg rounded-xl shadow-lg" data-speed="0.95">
+                    </div>
+                     <div class="col-span-1">
+                        <img src="https://placehold.co/600x800/0c69a3/ffffff?text=Cables" alt="Subsea Cables" class="parallax-bg rounded-xl shadow-lg" data-speed="1.05">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-24 bg-white/50 border-y border-black/10">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter reveal-on-scroll">End-to-End Seafloor Intelligence</h2>
+                    <p class="text-lg mt-4 text-subtle-text-color max-w-2xl mx-auto reveal-on-scroll" style="transition-delay: 150ms;">A complete suite of services, from raw soundings to boardroom-ready analysis.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Service Card 1 -->
+                    <div class="modern-card p-8 reveal-on-scroll">
+                        <div class="bg-accent-blue-light text-accent-blue rounded-lg h-12 w-12 flex items-center justify-center mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Data Acquisition</h3>
+                        <p class="text-subtle-text-color">State-of-the-art multibeam and satellite-derived bathymetry for unrivaled precision and coverage.</p>
+                    </div>
+                    <!-- Service Card 2 -->
+                    <div class="modern-card p-8 reveal-on-scroll" style="transition-delay: 150ms;">
+                        <div class="bg-accent-blue-light text-accent-blue rounded-lg h-12 w-12 flex items-center justify-center mb-6">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 9 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Data Processing</h3>
+                        <p class="text-subtle-text-color">Rigorous, proprietary workflows to clean, correct, and validate raw data to the highest scientific standards.</p>
+                    </div>
+                    <!-- Service Card 3 -->
+                    <div class="modern-card p-8 reveal-on-scroll" style="transition-delay: 300ms;">
+                        <div class="bg-accent-blue-light text-accent-blue rounded-lg h-12 w-12 flex items-center justify-center mb-6">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="m12 9-1.5 4h3L12 9Z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Analysis & Visualization</h3>
+                        <p class="text-subtle-text-color">Transforming complex datasets into clear 3D models, DEMs, and custom interactive chart products.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Assistant Section -->
+        <section id="ai-assistant" class="py-24 relative section-glow">
+            <div class="container mx-auto px-6 z-10">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter reveal-on-scroll">AI-Powered Project Assistant</h2>
+                    <p class="text-lg mt-4 text-subtle-text-color max-w-2xl mx-auto reveal-on-scroll" style="transition-delay: 150ms;">Get instant, data-driven insights for your project. Describe your scope and let our AI provide preliminary recommendations.</p>
+                </div>
+                <div class="max-w-4xl mx-auto modern-card p-8 reveal-on-scroll">
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                             <label for="project-description" class="block mb-2 font-medium text-sm text-gray-700">Project Description</label>
+                            <input type="text" id="project-description" class="w-full p-3 bg-white/50 border border-black/10 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="e.g., Subsea cable route survey...">
+                        </div>
+                        <div>
+                             <label for="industry-select" class="block mb-2 font-medium text-sm text-gray-700">Industry</label>
+                             <select id="industry-select" class="w-full p-3 border border-black/10 rounded-lg bg-white/50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                <option>Offshore Energy</option>
+                                <option>Maritime Navigation</option>
+                                <option>Coastal Management</option>
+                                <option>Subsea Telecom</option>
+                                <option>Marine Research</option>
+                                <option>Dredging & Construction</option>
+                             </select>
+                        </div>
+                    </div>
+                    <button id="generate-insights-button" class="w-full bg-gray-900 text-white font-semibold py-3 px-6 rounded-lg hover:bg-black transition-all duration-300 flex items-center justify-center space-x-2">
+                        <span>Generate Insights</span>
+                    </button>
+                    <div id="ai-results" class="mt-8"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-24 bg-white/50 border-y border-black/10">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter reveal-on-scroll">Trusted By The Leaders in Marine</h2>
+                    <p class="text-lg mt-4 text-subtle-text-color max-w-2xl mx-auto reveal-on-scroll" style="transition-delay: 150ms;">Our clients' success stories speak volumes.</p>
+                </div>
+                <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="modern-card p-8 reveal-on-scroll">
+                        <p class="mb-6 text-gray-700">"The resolution of Aqua-Metrics' data was a game-changer for our offshore wind farm project. We identified optimal turbine locations with a level of confidence we've never had before."</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/100x100/e0e0e0/333333?text=CS" class="w-10 h-10 rounded-full mr-4" alt="Carla Stevens">
+                            <div>
+                                <p class="font-semibold text-gray-900">Carla Stevens</p>
+                                <p class="text-sm text-subtle-text-color">Lead Engineer, OceanWind Energy</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modern-card p-8 reveal-on-scroll" style="transition-delay: 150ms;">
+                        <p class="mb-6 text-gray-700">"For updating our port's navigational charts, accuracy is non-negotiable. Aqua-Metrics delivered exceptionally clean data ahead of schedule, ensuring the safety of all maritime traffic."</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/100x100/d0d0d0/333333?text=ML" class="w-10 h-10 rounded-full mr-4" alt="Marcus Lowe">
+                            <div>
+                                <p class="font-semibold text-gray-900">Marcus Lowe</p>
+                                <p class="text-sm text-subtle-text-color">Harbor Master, Port Authority</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="modern-card p-8 reveal-on-scroll" style="transition-delay: 300ms;">
+                        <p class="mb-6 text-gray-700">"Their team was incredibly responsive. They provided custom data products that integrated seamlessly into our GIS, saving our coastal research team hundreds of hours."</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/100x100/c0c0c0/333333?text=DJ" class="w-10 h-10 rounded-full mr-4" alt="Dr. Anya Sharma">
+                            <div>
+                                <p class="font-semibold text-gray-900">Dr. Anya Sharma</p>
+                                <p class="text-sm text-subtle-text-color">Director, MCI</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24">
+            <div class="container mx-auto px-6 text-center reveal-on-scroll">
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter">Ready to Dive In?</h2>
+                <p class="text-lg mt-4 text-subtle-text-color max-w-2xl mx-auto mb-8">Let's discuss how our data can empower your next project. Contact our specialists today for a custom consultation.</p>
+                <a href="mailto:sales@aqua-metrics.com" class="bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg text-base hover:bg-blue-700 transition-transform hover:scale-105 inline-block">
+                    Contact Us
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white/50 border-t border-black/10">
+        <div class="container mx-auto px-6 py-8">
+            <div class="md:flex md:justify-between items-center text-center md:text-left">
+                <div class="mb-6 md:mb-0">
+                     <a href="#" class="text-lg font-bold">
+                        <span class="text-blue-600">Aqua</span>-Metrics
+                    </a>
+                    <p class="text-sm text-subtle-text-color mt-2">© <span id="copyright-year"></span> Aqua-Metrics. All Rights Reserved.</p>
+                </div>
+                <div class="flex space-x-6 justify-center text-subtle-text-color">
+                    <a href="#" class="hover:text-black"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
+                    <a href="#" class="hover:text-black"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg></a>
+                    <a href="#" class="hover:text-black"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014V8.588h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.336 9.763H6.34v-8.59H3.669v8.59zM17.668 1H6.328C3.965 1 2 2.985 2 5.337v13.326C2 21.015 3.965 23 6.328 23h11.34c2.363 0 4.332-1.985 4.332-4.337V5.337C22 2.985 20.03 1 17.668 1z" clip-rule="evenodd" /></svg></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- UI Element References ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const copyrightYear = document.getElementById('copyright-year');
+            const generateButton = document.getElementById('generate-insights-button');
+            const projectDescriptionInput = document.getElementById('project-description');
+            const industrySelect = document.getElementById('industry-select');
+            const aiResultsContainer = document.getElementById('ai-results');
+
+            // --- Mobile Menu Logic ---
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            document.querySelectorAll('.mobile-menu-link').forEach(link => {
+                 link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+            });
+
+            // --- Dynamic Copyright Year ---
+            if(copyrightYear) {
+                copyrightYear.textContent = new Date().getFullYear();
+            }
+            
+            // --- Parallax on Scroll ---
+            const parallaxElements = document.querySelectorAll('.parallax-bg');
+            const handleParallax = () => {
+                 if (window.innerWidth < 768) { // Disable on mobile
+                     parallaxElements.forEach(el => {
+                         el.style.transform = `translateY(0px)`;
+                     });
+                     return;
+                 };
+                 const scrollY = window.scrollY;
+                 parallaxElements.forEach(el => {
+                     const speed = parseFloat(el.getAttribute('data-speed') || 1);
+                     const offset = (scrollY * (speed - 1)) * 0.2;
+                     el.style.transform = `translateY(${offset}px)`;
+                 });
+            }
+            window.addEventListener('scroll', handleParallax);
+            handleParallax();
+
+
+            // --- Reveal elements on Scroll ---
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+                revealObserver.observe(el);
+            });
+            
+            // --- Gemini API Logic (largely unchanged) ---
+            generateButton.addEventListener('click', async () => {
+                const projectDescription = projectDescriptionInput.value.trim();
+                const industry = industrySelect.value;
+
+                if (!projectDescription) {
+                    aiResultsContainer.innerHTML = `<p class="text-red-500">Please provide a project description.</p>`;
+                    return;
+                }
+                
+                aiResultsContainer.innerHTML = '<div class="flex justify-center items-center p-8"><div class="loader"></div></div>';
+                generateButton.disabled = true;
+
+                const prompt = `
+                    Act as an expert bathymetric data consultant for Aqua-Metrics. A client from the "${industry}" industry needs insights for their project: "${projectDescription}".
+                    Provide a concise, professional summary using Markdown with these sections:
+                    1. **Key Data Requirements:** List essential data types.
+                    2. **Potential Challenges:** List potential technical or environmental challenges.
+                    3. **Recommended Aqua-Metrics Services:** Briefly recommend relevant services (Data Acquisition, Data Processing, Analysis & Visualization).
+                    Keep the tone helpful and encouraging.
+                `;
+
+                try {
+                    const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+                    const apiKey = ""; // Handled by environment
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                    
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) throw new Error(`API error: ${response.status}`);
+                    const result = await response.json();
+                    
+                    if (result.candidates && result.candidates[0].content.parts[0].text) {
+                        let text = result.candidates[0].content.parts[0].text;
+                        
+                        // Convert Markdown to HTML for display
+                        text = text
+                            .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>')
+                            .replace(/\n\s?\*\s/g, '<li class="mt-2 pl-2">')
+                            .replace(/(\n<\/li>|<\/li>)/g, '</li>\n')
+                            .replace(/<li/g, '<ul class="list-disc list-inside text-subtle-text-color space-y-1"><li')
+                            .replace(/<\/li>\n(?!<li)/g, '</li></ul>')
+                            .replace(/<\/ul>\n<ul>/g, '\n')
+                            .replace(/\n/g, '<br>');
+
+                        aiResultsContainer.innerHTML = `
+                            <div class="prose max-w-none p-6 mt-6 bg-blue-50/50 rounded-lg border border-blue-200/50 text-sm">
+                                ${text}
+                                <p class="mt-6 font-medium text-xs text-gray-500">This AI analysis is a preliminary guide. For a detailed assessment, please <a href="#contact" class="text-blue-600 hover:underline">contact our specialists</a>.</p>
+                            </div>
+                        `;
+                    } else {
+                        throw new Error("Invalid response structure from AI.");
+                    }
+                } catch (error) {
+                    console.error("Gemini API Error:", error);
+                    aiResultsContainer.innerHTML = `<p class="text-red-500 mt-4">Sorry, we couldn't generate insights at this time. Please try again later.</p>`;
+                } finally {
+                    generateButton.disabled = false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
