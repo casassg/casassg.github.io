@@ -4,7 +4,7 @@ Oh, look, you found my repo for my personal website! There's not much interestin
 
 # Run project
 
-Needs: Ruby
+Needs: hermit
 
 ## Local 
 
