@@ -25,32 +25,6 @@
         .check-icon {
             opacity: 0; transition: opacity 0.2s;
         }
-        /* Estilos para el tooltip */
-        .tooltip-arrow {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-top: 8px solid #1f2937; /* Mismo color que bg-gray-800 */
-            bottom: -0.5rem; /* -8px */
-        }
-        /* Estilos para el tooltip (flecha arriba) */
-        .tooltip-arrow-top {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-bottom: 8px solid #1f2937; /* Mismo color que bg-gray-800 */
-            top: -0.5rem; /* -8px */
-        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800 p-4 md:p-8">
@@ -126,11 +100,10 @@
                 <!-- LUNES --><div x-show="activeTab === 'lunes'" x-cloak class="space-y-4">
                     <h2 class="text-xl font-semibold text-indigo-600">Pecho / Bícep / Hombro</h2>
                     <template x-for="(exercise, index) in getFilteredExercises('lunes')" :key="index">
-                        <div class="exercise-item relative" x-data="{ hovered: false }">
+                        <div class="exercise-item">
                             <input :id="'lunes-' + index" type="checkbox" class="hidden" x-model="exercise.completed" @change="saveProgress()">
                             <label :for="'lunes-' + index" 
-                                   class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer border border-gray-200"
-                                   @mouseenter="hovered = true" @mouseleave="hovered = false">
+                                   class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer border border-gray-200">
                                 <div class="mr-4 flex-shrink-0 w-12 h-12 flex items-center justify-center text-3xl">
                                     <span x-text="getIcon(exercise.type)"></span>
                                 </div>
@@ -145,13 +118,7 @@
                                     <svg class="w-4 h-4 text-white check-icon" :class="{ 'check-icon': !exercise.completed }" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                                 </div>
                             </label>
-                            <div x-show="hovered" x-cloak x-transition
-                                 @mouseenter="hovered = true" @mouseleave="hovered = false"
-                                 class="absolute z-50 w-64 p-3 bg-gray-800 text-white text-sm rounded-lg shadow-lg left-1/2 -translate-x-1/2 pointer-events-auto"
-                                 style="top: 4.5rem; min-width: 16rem;">
-                                <div class="tooltip-arrow-top"></div>
-                                <p class="whitespace-normal" x-text="exercise.description"></p>
-                            </div>
+                            <div class="pl-16 pr-3 pb-2 pt-1 text-sm text-gray-600" x-text="exercise.description"></div>
                         </div>
                     </template>
                     <button @click="clearDay('lunes')" class="w-full text-center text-sm text-gray-500 hover:text-red-500 transition-colors duration-200 mt-4">Limpiar checks</button>
@@ -160,11 +127,10 @@
                 <!-- MARTES --><div x-show="activeTab === 'martes'" x-cloak class="space-y-4">
                     <h2 class="text-xl font-semibold text-indigo-600">Espalda / Trícep</h2>
                     <template x-for="(exercise, index) in getFilteredExercises('martes')" :key="index">
-                        <div class="exercise-item relative" x-data="{ hovered: false }">
+                        <div class="exercise-item">
                             <input :id="'martes-' + index" type="checkbox" class="hidden" x-model="exercise.completed" @change="saveProgress()">
                             <label :for="'martes-' + index" 
-                                   class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer border border-gray-200"
-                                   @mouseenter="hovered = true" @mouseleave="hovered = false">
+                                   class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer border border-gray-200">
                                 <div class="mr-4 flex-shrink-0 w-12 h-12 flex items-center justify-center text-3xl">
                                     <span x-text="getIcon(exercise.type)"></span>
                                 </div>
@@ -179,13 +145,7 @@
                                     <svg class="w-4 h-4 text-white check-icon" :class="{ 'check-icon': !exercise.completed }" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                                 </div>
                             </label>
-                            <div x-show="hovered" x-cloak x-transition
-                                 @mouseenter="hovered = true" @mouseleave="hovered = false"
-                                 class="absolute z-50 w-64 p-3 bg-gray-800 text-white text-sm rounded-lg shadow-lg left-1/2 -translate-x-1/2 pointer-events-auto"
-                                 style="top: 4.5rem; min-width: 16rem;">
-                                <div class="tooltip-arrow-top"></div>
-                                <p class="whitespace-normal" x-text="exercise.description"></p>
-                            </div>
+                            <div class="pl-16 pr-3 pb-2 pt-1 text-sm text-gray-600" x-text="exercise.description"></div>
                         </div>
                     </template>
                     <button @click="clearDay('martes')" class="w-full text-center text-sm text-gray-500 hover:text-red-500 transition-colors duration-200 mt-4">Limpiar checks</button>
@@ -194,11 +154,10 @@
                 <!-- MIÉRCOLES --><div x-show="activeTab === 'miercoles'" x-cloak class="space-y-4">
                     <h2 class="text-xl font-semibold text-indigo-600">Pierna</h2>
                     <template x-for="(exercise, index) in getFilteredExercises('miercoles')" :key="index">
-                        <div class="exercise-item relative" x-data="{ hovered: false }">
+                        <div class="exercise-item">
                             <input :id="'miercoles-' + index" type="checkbox" class="hidden" x-model="exercise.completed" @change="saveProgress()">
                             <label :for="'miercoles-' + index" 
-                                   class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer border border-gray-200"
-                                   @mouseenter="hovered = true" @mouseleave="hovered = false">
+                                   class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer border border-gray-200">
                                 <div class="mr-4 flex-shrink-0 w-12 h-12 flex items-center justify-center text-3xl">
                                     <span x-text="getIcon(exercise.type)"></span>
                                 </div>
@@ -213,13 +172,7 @@
                                     <svg class="w-4 h-4 text-white check-icon" :class="{ 'check-icon': !exercise.completed }" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                                 </div>
                             </label>
-                            <div x-show="hovered" x-cloak x-transition
-                                 @mouseenter="hovered = true" @mouseleave="hovered = false"
-                                 class="absolute z-50 w-64 p-3 bg-gray-800 text-white text-sm rounded-lg shadow-lg left-1/2 -translate-x-1/2 pointer-events-auto"
-                                 style="top: 4.5rem; min-width: 16rem;">
-                                <div class="tooltip-arrow-top"></div>
-                                <p class="whitespace-normal" x-text="exercise.description"></p>
-                            </div>
+                            <div class="pl-16 pr-3 pb-2 pt-1 text-sm text-gray-600" x-text="exercise.description"></div>
                         </div>
                     </template>
                     <button @click="clearDay('miercoles')" class="w-full text-center text-sm text-gray-500 hover:text-red-500 transition-colors duration-200 mt-4">Limpiar checks</button>
@@ -228,11 +181,10 @@
                 <!-- JUEVES --><div x-show="activeTab === 'jueves'" x-cloak class="space-y-4">
                     <h2 class="text-xl font-semibold text-indigo-600">Pecho / Hombro</h2>
                     <template x-for="(exercise, index) in getFilteredExercises('jueves')" :key="index">
-                        <div class="exercise-item relative" x-data="{ hovered: false }">
+                        <div class="exercise-item">
                             <input :id="'jueves-' + index" type="checkbox" class="hidden" x-model="exercise.completed" @change="saveProgress()">
                             <label :for="'jueves-' + index" 
-                                   class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer border border-gray-200"
-                                   @mouseenter="hovered = true" @mouseleave="hovered = false">
+                                   class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer border border-gray-200">
                                 <div class="mr-4 flex-shrink-0 w-12 h-12 flex items-center justify-center text-3xl">
                                     <span x-text="getIcon(exercise.type)"></span>
                                 </div>
@@ -247,13 +199,7 @@
                                     <svg class="w-4 h-4 text-white check-icon" :class="{ 'check-icon': !exercise.completed }" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                                 </div>
                             </label>
-                            <div x-show="hovered" x-cloak x-transition
-                                 @mouseenter="hovered = true" @mouseleave="hovered = false"
-                                 class="absolute z-50 w-64 p-3 bg-gray-800 text-white text-sm rounded-lg shadow-lg left-1/2 -translate-x-1/2 pointer-events-auto"
-                                 style="top: 4.5rem; min-width: 16rem;">
-                                <div class="tooltip-arrow-top"></div>
-                                <p class="whitespace-normal" x-text="exercise.description"></p>
-                            </div>
+                            <div class="pl-16 pr-3 pb-2 pt-1 text-sm text-gray-600" x-text="exercise.description"></div>
                         </div>
                     </template>
                     <button @click="clearDay('jueves')" class="w-full text-center text-sm text-gray-500 hover:text-red-500 transition-colors duration-200 mt-4">Limpiar checks</button>
@@ -262,11 +208,10 @@
                 <!-- VIERNES --><div x-show="activeTab === 'viernes'" x-cloak class="space-y-4">
                     <h2 class="text-xl font-semibold text-indigo-600">Espalda / Bícep</h2>
                     <template x-for="(exercise, index) in getFilteredExercises('viernes')" :key="index">
-                        <div class="exercise-item relative" x-data="{ hovered: false }">
+                        <div class="exercise-item">
                             <input :id="'viernes-' + index" type="checkbox" class="hidden" x-model="exercise.completed" @change="saveProgress()">
                             <label :for="'viernes-' + index" 
-                                   class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer border border-gray-200"
-                                   @mouseenter="hovered = true" @mouseleave="hovered = false">
+                                   class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer border border-gray-200">
                                 <div class="mr-4 flex-shrink-0 w-12 h-12 flex items-center justify-center text-3xl">
                                     <span x-text="getIcon(exercise.type)"></span>
                                 </div>
@@ -281,13 +226,7 @@
                                     <svg class="w-4 h-4 text-white check-icon" :class="{ 'check-icon': !exercise.completed }" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                                 </div>
                             </label>
-                            <div x-show="hovered" x-cloak x-transition
-                                 @mouseenter="hovered = true" @mouseleave="hovered = false"
-                                 class="absolute z-50 w-64 p-3 bg-gray-800 text-white text-sm rounded-lg shadow-lg left-1/2 -translate-x-1/2 pointer-events-auto"
-                                 style="top: 4.5rem; min-width: 16rem;">
-                                <div class="tooltip-arrow-top"></div>
-                                <p class="whitespace-normal" x-text="exercise.description"></p>
-                            </div>
+                            <div class="pl-16 pr-3 pb-2 pt-1 text-sm text-gray-600" x-text="exercise.description"></div>
                         </div>
                     </template>
                     <button @click="clearDay('viernes')" class="w-full text-center text-sm text-gray-500 hover:text-red-500 transition-colors duration-200 mt-4">Limpiar checks</button>
@@ -296,11 +235,10 @@
                 <!-- SÁBADO --><div x-show="activeTab === 'sabado'" x-cloak class="space-y-4">
                     <h2 class="text-xl font-semibold text-indigo-600">Pierna / Trícep</h2>
                     <template x-for="(exercise, index) in getFilteredExercises('sabado')" :key="index">
-                        <div class="exercise-item relative" x-data="{ hovered: false }">
+                        <div class="exercise-item">
                             <input :id="'sabado-' + index" type="checkbox" class="hidden" x-model="exercise.completed" @change="saveProgress()">
                             <label :for="'sabado-' + index" 
-                                   class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer border border-gray-200"
-                                   @mouseenter="hovered = true" @mouseleave="hovered = false">
+                                   class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer border border-gray-200">
                                 <div class="mr-4 flex-shrink-0 w-12 h-12 flex items-center justify-center text-3xl">
                                     <span x-text="getIcon(exercise.type)"></span>
                                 </div>
@@ -315,13 +253,7 @@
                                     <svg class="w-4 h-4 text-white check-icon" :class="{ 'check-icon': !exercise.completed }" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                                 </div>
                             </label>
-                            <div x-show="hovered" x-cloak x-transition
-                                 @mouseenter="hovered = true" @mouseleave="hovered = false"
-                                 class="absolute z-50 w-64 p-3 bg-gray-800 text-white text-sm rounded-lg shadow-lg left-1/2 -translate-x-1/2 pointer-events-auto"
-                                 style="top: 4.5rem; min-width: 16rem;">
-                                <div class="tooltip-arrow-top"></div>
-                                <p class="whitespace-normal" x-text="exercise.description"></p>
-                            </div>
+                            <div class="pl-16 pr-3 pb-2 pt-1 text-sm text-gray-600" x-text="exercise.description"></div>
                         </div>
                     </template>
                     <button @click="clearDay('sabado')" class="w-full text-center text-sm text-gray-500 hover:text-red-500 transition-colors duration-200 mt-4">Limpiar checks</button>
@@ -345,83 +277,24 @@
                     optedIntoFull: false
                 },
                 
-                workouts: {
-                    lunes: [
-                        { name: "Press declinado con mancuernas", sets: "4x10", type: "dumbbell", completed: false, description: "Acuéstate en un **banco declinado** (donde la cabeza está más baja que los pies). Baja las mancuernas lentamente hacia los lados del pecho y luego súbelas con fuerza, concentrándote en la parte inferior del pecho." },
-                        { name: "Press inclinado con mancuernas", sets: "4x10", type: "dumbbell", completed: false, description: "Acuéstate en un **banco inclinado** (a unos 30-45°, donde la cabeza está más alta que los pies). Baja las mancuernas a los lados de la parte superior del pecho y súbelas, enfocándote en la parte superior del pecho." },
-                        { name: "Press plano con barra", sets: "4x10", type: "barbell", completed: false, description: "Acuéstate en el **banco plano**, agarra la barra un poco más ancha que tus hombros. Baja la barra al pecho de forma controlada y súbela explosivamente." },
-                        { name: "Aperturas en polea (Cable Flys)", sets: "4x10", type: "cable", completed: false, description: "De pie en medio de una **máquina de polea dual** (dos poleas laterales), da un paso adelante. Con los codos ligeramente doblados, junta las manos al frente, sintiendo la contracción en el pecho." },
-                        { name: "Curl martillo con mancuerna sentado", sets: "4x10", type: "dumbbell", completed: false, description: "Sentado, con una mancuerna en cada mano y las palmas de las manos mirándose (este es el **agarre martillo o neutro**). Sube una mancuerna y luego la otra, sin girar la muñeca, para trabajar el braquial y el bíceps." },
-                        { name: "Biserie 1: Curl bíceps con barra", sets: "4x10", type: "barbell", completed: false, description: "De pie, agarra una barra con las palmas hacia arriba (agarre supinado). Sin balancear el cuerpo, sube la barra hacia tu pecho, sintiendo el trabajo del bíceps." },
-                        { name: "Biserie 2: Curl martillo con cuerda", sets: "4x10", type: "cable", completed: false, description: "En la **polea baja**, usa el agarre de cuerda. Tira de la cuerda hacia tus hombros manteniendo las palmas enfrentadas (agarre martillo), enfocándote en el braquial." },
-                        { name: "Curl bayesian en polea (por brazo)", sets: "4x10", type: "cable", completed: false, description: "De espaldas a la **polea alta**, agarra un maneral individual. Con el brazo extendido hacia atrás, haz un curl trayendo la mano hacia tu hombro, buscando un estiramiento profundo del bíceps." },
-                        { name: "Elevaciones laterales con mancuerna", sets: "4x10", type: "dumbbell", completed: false, description: "Sentado o de pie, con mancuernas a los lados. Levanta los brazos rectos (ligeramente flexionados) hacia los lados hasta la altura del hombro, concentrándote en el deltoides lateral." },
-                        { name: "Press militar con mancuernas", sets: "4x10", type: "dumbbell", completed: false, description: "Sentado con respaldo vertical. Sube las mancuernas desde la altura de los hombros hasta estirar los brazos por encima de la cabeza, trabajando los hombros." },
-                        { name: "Elevaciones frontales con barra en polea", sets: "4x10", type: "cable", completed: false, description: "De espaldas a la **polea baja**, agarra una barra recta. Levanta los brazos rectos al frente hasta la altura de los hombros, enfocándote en la parte frontal del hombro." },
-                        { name: "Face pull", sets: "4x12", type: "cable", completed: false, description: "En la **polea alta** con la cuerda. Tira de la cuerda hacia tu cara, separando las manos y llevando los codos hacia atrás y arriba, para trabajar la parte trasera del hombro y los trapecios." },
-                        { name: "Elevaciones laterales en polea (un brazo)", sets: "4x10", type: "cable", completed: false, description: "De lado a la **polea baja**. Levanta el brazo recto hacia el lado, cruzando ligeramente por delante del cuerpo para iniciar el movimiento, enfocándote en el deltoides lateral." }
-                    ],
-                    martes: [
-                        { name: "Remo con mancuerna (Dumbbell Row)", sets: "4x10", type: "dumbbell", completed: false, description: "Apoya una rodilla y una mano en un banco. Con la espalda recta, tira de la mancuerna hacia tu cadera, apretando la espalda en la parte superior del movimiento." },
-                        { name: "Jalón al pecho (en polea dual)", sets: "4x10", type: "cable", completed: false, description: "Usa el accesorio de barra larga en la **polea alta**. Siéntate, agarra la barra y tira de ella hacia la parte superior de tu pecho, apretando los omóplatos para activar los dorsales." },
-                        { name: "Pull over con cuerda", sets: "4x10", type: "cable", completed: false, description: "En la **polea alta** con la cuerda. De pie, inclínate ligeramente y tira de la cuerda hacia tus caderas con los brazos casi rectos, sintiendo la contracción en el dorsal." },
-                        { name: "Pull down agarre cerrado (en polea)", sets: "4x10", type: "cable", completed: false, description: "En la **polea alta**, usa el agarre V (triángulo). Tira del agarre hacia tu pecho, manteniendo los codos pegados al cuerpo para enfatizar el trabajo en la parte central de la espalda." },
-                        { name: "Extensión de espalda en máquina", sets: "4x12", type: "machine", completed: false, description: "Siéntate en la máquina de extensión de espalda. Empuja hacia atrás con la fuerza de tus lumbares de forma controlada, fortaleciendo la parte baja de la espalda." },
-                        { name: "Extensión \"Copa\" con mancuerna", sets: "4x10", type: "dumbbell", completed: false, description: "Sentado, sostén una mancuerna con ambas manos por encima de la cabeza (como una copa). Baja la mancuerna por detrás de la cabeza flexionando los codos y luego estira los brazos, trabajando el tríceps." },
-                        { name: "Extensión de tríceps en polea (cuerda)", sets: "4x10", type: "cable", completed: false, description: "En la **polea alta**, usa la cuerda. Empuja la cuerda hacia abajo y separa las manos al final del movimiento, concentrándote en la extensión completa del tríceps." },
-                        { name: "Extensión de tríceps en polea (triángulo)", sets: "4x10", type: "cable", completed: false, description: "En la **polea alta**, usa el agarre V (triángulo). Empuja hacia abajo manteniendo los codos fijos a los costados del cuerpo, para un trabajo más enfocado en la cabeza larga del tríceps." },
-                        { name: "Extensión de tríceps a una mano (polea)", sets: "4x10", type: "cable", completed: false, description: "En la **polea alta**, usa un maneral individual con agarre invertido (palma hacia arriba). Empuja hacia abajo, concentrando el trabajo en un tríceps a la vez." }
-                    ],
-                    miercoles: [
-                        { name: "Sentadillas con barra (o Goblet)", sets: "4x10", type: "barbell", completed: false, description: "Para **Sentadillas con barra**: Coloca la barra sobre tus trapecios. Baja la cadera como si te fueras a sentar, manteniendo el pecho erguido y la espalda recta. Rompe el paralelo (cadera más baja que rodillas). Para **Sentadilla Goblet**: Sostén una mancuerna verticalmente frente a tu pecho y realiza el mismo movimiento." },
-                        { name: "Desplantes con mancuernas", sets: "4x12 pasos", type: "dumbbell", completed: false, description: "Sostén una mancuerna en cada mano. Da un paso largo hacia adelante y baja la rodilla trasera casi hasta el suelo. Empuja con la pierna delantera para volver a la posición inicial, alternando piernas." },
-                        { name: "Extensión de cuádriceps a una pierna", sets: "4x10", type: "machine", completed: false, description: "En la **máquina de extensión de cuádriceps**, ajusta el peso. Estira una pierna controladamente, apretando el cuádriceps en la parte superior del movimiento. Baja lentamente." },
-                        { name: "Extensión de cuádriceps (ambas)", sets: "4x10", type: "machine", completed: false, description: "En la **máquina de extensión de cuádriceps**, estira ambas piernas simultáneamente. Aguanta un segundo arriba y baja controlado, sintiendo el trabajo en la parte frontal del muslo." },
-                        { name: "Curl femoral (Leg Curl)", sets: "4x10", type: "machine", completed: false, description: "Acuéstate o siéntate en la **máquina de curl femoral**. Trae los talones hacia tus glúteos, apretando los isquiotibiales (femorales) en la parte superior del movimiento." },
-                        { name: "Abducción en polea", sets: "4x12", type: "cable", completed: false, description: "Ponte un brazalete en el tobillo en la **polea baja**. De lado, levanta la pierna hacia afuera, controlando el movimiento para trabajar los abductores (parte externa del muslo y glúteos)." },
-                        { name: "Aducción en polea", sets: "4x12", type: "cable", completed: false, description: "Ponte un brazalete en el tobillo en la **polea baja**. De pie, cruza la pierna por delante de la otra, apretando la parte interna del muslo (aductores)." },
-                        { name: "Elevación de pantorrillas (con mancuerna)", sets: "4x12", type: "dumbbell", completed: false, description: "De pie, con mancuernas a los lados. Ponte de puntillas lo más alto que puedas, sintiendo la contracción en las pantorrillas, y baja lentamente." }
-                    ],
-                    jueves: [
-                        { name: "Press declinado con mancuernas", sets: "4x10", type: "dumbbell", completed: false, description: "Acuéstate en un **banco declinado** (donde la cabeza está más baja que los pies). Baja las mancuernas lentamente hacia los lados del pecho y luego súbelas con fuerza, concentrándote en la parte inferior del pecho." },
-                        { name: "Press inclinado con mancuernas", sets: "4x10", type: "dumbbell", completed: false, description: "Acuéstate en un **banco inclinado** (a unos 30-45°, donde la cabeza está más alta que los pies). Baja las mancuernas a los lados de la parte superior del pecho y súbelas, enfocándote en la parte superior del pecho." },
-                        { name: "Press plano con barra", sets: "4x10", type: "barbell", completed: false, description: "Acuéstate en el **banco plano**, agarra la barra un poco más ancha que tus hombros. Baja la barra al pecho de forma controlada y súbela explosivamente." },
-                        { name: "Aperturas en polea (Cable Flys)", sets: "4x10", type: "cable", completed: false, description: "De pie en medio de una **máquina de polea dual** (dos poleas laterales), da un paso adelante. Con los codos ligeramente doblados, junta las manos al frente, sintiendo la contracción en el pecho." },
-                        { name: "Elevaciones laterales con mancuerna", sets: "4x10", type: "dumbbell", completed: false, description: "Sentado o de pie, con mancuernas a los lados. Levanta los brazos rectos (ligeramente flexionados) hacia los lados hasta la altura del hombro, concentrándote en el deltoides lateral." },
-                        { name: "Press militar con mancuernas", sets: "4x10", type: "dumbbell", completed: false, description: "Sentado con respaldo vertical. Sube las mancuernas desde la altura de los hombros hasta estirar los brazos por encima de la cabeza, trabajando los hombros." },
-                        { name: "Elevaciones frontales con barra en polea", sets: "4x10", type: "cable", completed: false, description: "De espaldas a la **polea baja**, agarra una barra recta. Levanta los brazos rectos al frente hasta la altura de los hombros, enfocándote en la parte frontal del hombro." },
-                        { name: "Face pull", sets: "4x12", type: "cable", completed: false, description: "En la **polea alta** con la cuerda. Tira de la cuerda hacia tu cara, separando las manos y llevando los codos hacia atrás y arriba, para trabajar la parte trasera del hombro y los trapecios." },
-                        { name: "Elevaciones laterales en polea (un brazo)", sets: "4x10", type: "cable", completed: false, description: "De lado a la **polea baja**. Levanta el brazo recto hacia el lado, cruzando ligeramente por delante del cuerpo para iniciar el movimiento, enfocándode en el deltoides lateral." }
-                    ],
-                    viernes: [
-                        { name: "Remo con mancuerna (Dumbbell Row)", sets: "4x10", type: "dumbbell", completed: false, description: "Apoya una rodilla y una mano en un banco. Con la espalda recta, tira de la mancuerna hacia tu cadera, apretando la espalda en la parte superior del movimiento." },
-                        { name: "Jalón al pecho (en polea dual)", sets: "4x10", type: "cable", completed: false, description: "Usa el accesorio de barra larga en la **polea alta**. Siéntate, agarra la barra y tira de ella hacia la parte superior de tu pecho, apretando los omóplatos para activar los dorsales." },
-                        { name: "Pull over con cuerda", sets: "4x10", type: "cable", completed: false, description: "En la **polea alta** con la cuerda. De pie, inclínate ligeramente y tira de la cuerda hacia tus caderas con los brazos casi rectos, sintiendo la contracción en el dorsal." },
-                        { name: "Pull down agarre cerrado (en polea)", sets: "4x10", type: "cable", completed: false, description: "En la **polea alta**, usa el agarre V (triángulo). Tira del agarre hacia tu pecho, manteniendo los codos pegados al cuerpo para enfatizar el trabajo en la parte central de la espalda." },
-                        { name: "Extensión de espalda en máquina", sets: "4x12", type: "machine", completed: false, description: "Siéntate en la máquina de extensión de espalda. Empuja hacia atrás con la fuerza de tus lumbares de forma controlada, fortaleciendo la parte baja de la espalda." },
-                        { name: "Curl martillo con mancuerna sentado", sets: "4x10", type: "dumbbell", completed: false, description: "Sentado, con una mancuerna en cada mano y las palmas de las manos mirándose (este es el **agarre martillo o neutro**). Sube una mancuerna y luego la otra, sin girar la muñeca, para trabajar el braquial y el bíceps." },
-                        { name: "Biserie 1: Curl bíceps con barra", sets: "4x10", type: "barbell", completed: false, description: "De pie, agarra una barra con las palmas hacia arriba (agarre supinado). Sin balancear el cuerpo, sube la barra hacia tu pecho, sintiendo el trabajo del bíceps." },
-                        { name: "Biserie 2: Curl martillo con cuerda", sets: "4x10", type: "cable", completed: false, description: "En la **polea baja**, usa el agarre de cuerda. Tira de la cuerda hacia tus hombros manteniendo las palmas enfrentadas (agarre martillo), enfocándote en el braquial." },
-                        { name: "Curl bayesian en polea (por brazo)", sets: "4x10", type: "cable", completed: false, description: "De espaldas a la **polea alta**, agarra un maneral individual. Con el brazo extendido hacia atrás, haz un curl trayendo la mano hacia tu hombro, buscando un estiramiento profundo del bíceps." }
-                    ],
-                    sabado: [
-                        { name: "Sentadillas con barra (o Goblet)", sets: "4x10", type: "barbell", completed: false, description: "Para **Sentadillas con barra**: Coloca la barra sobre tus trapecios. Baja la cadera como si te fueras a sentar, manteniendo el pecho erguido y la espalda recta. Rompe el paralelo (cadera más baja que rodillas). Para **Sentadilla Goblet**: Sostén una mancuerna verticalmente frente a tu pecho y realiza el mismo movimiento." },
-                        { name: "Desplantes con mancuernas", sets: "4x12 pasos", type: "dumbbell", completed: false, description: "Sostén una mancuerna en cada mano. Da un paso largo hacia adelante y baja la rodilla trasera casi hasta el suelo. Empuja con la pierna delantera para volver a la posición inicial, alternando piernas." },
-                        { name: "Extensión de cuádriceps a una pierna", sets: "4x10", type: "machine", completed: false, description: "En la **máquina de extensión de cuádriceps**, ajusta el peso. Estira una pierna controladamente, apretando el cuádriceps en la parte superior del movimiento. Baja lentamente." },
-                        { name: "Extensión de cuádriceps (ambas)", sets: "4x10", type: "machine", completed: false, description: "En la **máquina de extensión de cuádriceps**, estira ambas piernas simultáneamente. Aguanta un segundo arriba y baja controlado, sintiendo el trabajo en la parte frontal del muslo." },
-                        { name: "Curl femoral (Leg Curl)", sets: "4x10", type: "machine", completed: false, description: "Acuéstate o siéntate en la **máquina de curl femoral**. Trae los talones hacia tus glúteos, apretando los isquiotibiales (femorales) en la parte superior del movimiento." },
-                        { name: "Abducción en polea", sets: "4x12", type: "cable", completed: false, description: "Ponte un brazalete en el tobillo en la **polea baja**. De lado, levanta la pierna hacia afuera, controlando el movimiento para trabajar los abductores (parte externa del muslo y glúteos)." },
-                        { name: "Aducción en polea", sets: "4x12", type: "cable", completed: false, description: "Ponte un brazalete en el tobillo en la **polea baja**. De pie, cruza la pierna por delante de la otra, apretando la parte interna del muslo (aductores)." },
-                        { name: "Elevación de pantorrillas (con mancuerna)", sets: "4x12", type: "dumbbell", completed: false, description: "De pie, con mancuernas a los lados. Ponte de puntillas lo más alto que puedas, sintiendo la contracción en las pantorrillas, y baja lentamente." },
-                        { name: "Extensión de tríceps en polea (cuerda)", sets: "4x10", type: "cable", completed: false, description: "En la **polea alta**, usa la cuerda. Empuja la cuerda hacia abajo y separa las manos al final del movimiento, concentrándote en la extensión completa del tríceps." },
-                        { name: "Extensión de tríceps en polea (triángulo)", sets: "4x10", type: "cable", completed: false, description: "En la **polea alta**, usa el agarre V (triángulo). Empuja hacia abajo manteniendo los codos fijos a los costados del cuerpo, para un trabajo más enfocado en la cabeza larga del tríceps." },
-                        { name: "Extensión de tríceps a una mano (polea)", sets: "4x10", type: "cable", completed: false, description: "En la **polea alta**, usa un maneral individual con agarre invertido (palma hacia arriba). Empuja hacia abajo, concentrando el trabajo en un tríceps a la vez." }
-                    ]
-                },
+                workouts: {},
 
-                init() {
+                async init() {
+                    await this.loadExercises();
                     this.loadProgression();
                     this.loadProgress();
+                },
+                
+                async loadExercises() {
+                    try {
+                        const response = await fetch('exercises.json');
+                        if (!response.ok) {
+                            throw new Error('Failed to load exercises');
+                        }
+                        this.workouts = await response.json();
+                    } catch (e) {
+                        console.error("Error loading exercises:", e);
+                    }
                 },
                 
                 loadProgression() {
@@ -491,6 +364,9 @@
                 },
                 
                 getFilteredExercises(day) {
+                    if (!this.workouts[day]) {
+                        return [];
+                    }
                     if (this.progression.optedIntoFull) {
                         return this.workouts[day];
                     }
@@ -624,6 +500,9 @@
                 },
                 
                 clearDay(day) {
+                    if (!this.workouts[day]) {
+                        return;
+                    }
                     this.workouts[day].forEach(exercise => {
                         exercise.completed = false;
                     });
