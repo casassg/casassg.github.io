@@ -10,6 +10,10 @@
   link: https://twitter.com/casassaez
   fa-icon: x-twitter
   fa-brand: true
+- title: GoodReads
+  link: http://goodreads.com/casassaez
+  fa-icon: goodreads-g
+  fa-brand: true
 - title: Instagram 
   link: https://instagram.com/casassg
   fa-icon: instagram
