@@ -2,15 +2,12 @@
 
 Oh, look, you found my repo for my personal website! There's not much interesting here. Feel free to use the theme for your website!
 
-# Run project
-
-Needs: hermit
-
-## Local 
+## Development
 
 1. `git clone https://github.com/casassg/casassg.github.io && cd casassg.github.io`
-2. `gem install jekyll`
-3. `jekyll serve --watch`
+2. `source ./bin/activate-hermit`
+3. `gem install jekyll`
+4. `jekyll serve --watch`
 
 ## Deploy
 
