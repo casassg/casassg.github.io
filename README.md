@@ -6,12 +6,11 @@ Oh, look, you found my repo for my personal website! There's not much interestin
 
 1. `git clone https://github.com/casassg/casassg.github.io && cd casassg.github.io`
 2. `source ./bin/activate-hermit`
-3. `gem install jekyll`
-4. `jekyll serve --watch`
+3. `./bin/hugo server --buildDrafts`
 
 ## Deploy
 
-1. Push changes to master
-2. There's no `2`
+1. Push changes to `master` (or `main`)
+2. GitHub Actions builds and deploys Hugo to GitHub Pages automatically
 
-Deployment is done automatically by [GitHub pages](https://pages.github.com/). You don't need to do anything else than pushing to master.
+Deployment is done automatically by [GitHub Pages](https://pages.github.com/) via `.github/workflows/hugo-pages.yml`, using Hugo from Hermit (`./bin/hugo`).

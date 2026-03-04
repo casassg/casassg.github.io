@@ -1,23 +1,19 @@
----
-layout: base
----
-
-
+{{ define "main" }}
 <div id="wrapper">
 	<section id="main">
 		<header>
-			<h1>{{site.title}}</h1>
+			<h1>{{ .Site.Title }}</h1>
 			<div class="separator"></div>
-			<p>{{site.description}}</p>
+			<p>{{ .Site.Params.description | markdownify }}</p>
 		</header>
 
 		<footer>
 			<div class="icons">
-				{% for social in site.data.social %}
-				<a target="_blank" href="{{social.link}}"
-					class="fa fa-3x fa-{{social.fa-icon}} {% if social.fa-brand %} fa-brands {% endif %}"><span
-						class="label">{{social.title}}</span></a>
-				{% endfor %}
+				{{ range .Site.Data.social }}
+				<a target="_blank" href="{{ .link }}"
+					class="fa fa-3x fa-{{ index . "fa-icon" }} {{ if index . "fa-brand" }} fa-brands {{ end }}"><span
+						class="label">{{ .title }}</span></a>
+				{{ end }}
 				<a id="stats_button" href="#stats" class="fa fa-3x fa-chart-simple"><span class="label">Stats</span></a>
 
 			</div>
@@ -52,6 +48,7 @@ layout: base
 			</div>
 		</footer>
 	</section>
-	<script defer src="assets/js/stats.js"></script>
+	<script defer src="/assets/js/stats.js"></script>
 
 </div>
+{{ end }}

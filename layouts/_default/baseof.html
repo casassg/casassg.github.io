@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="{{ .Site.Params.color }}">
+    <meta name="author" content="{{ .Site.Params.author }}">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+    <meta name="description" content="{{ default .Site.Params.description .Description | plainify }}">
+    <meta name="keywords" content="gerard, boulder, engineer, personal website, gerard casas saez"/>
+    <meta name="copyright" content="{{ .Site.Params.author }}"/>
+
+    <!--FACEBOOK DESCRIPTION -->
+    <meta property="og:title" content="{{ default .Site.Title .Title }}"/>
+    <meta property="og:site_name" content="{{ .Site.Title }}"/>
+    <meta property="og:description" content="{{ default .Site.Params.description .Description | plainify }}"/>
+    <meta property="og:url" content="{{ .Site.BaseURL }}">
+
+    <!--TWITTER DESCRIPTION -->
+    <meta name="twitter:card" content="summary">
+    {{ with .Site.Params.twitter }}
+      <meta name="twitter:site" content="@{{ . }}">
+      <meta name="twitter:creator" content="@{{ . }}">
+    {{ end }}
+    <meta name="twitter:title" content="{{ .Site.Title }}">
+    <meta name="twitter:description" content="{{ default .Site.Params.description .Description | plainify }}">
+
+    <link rel="stylesheet" href="/assets/css/reset.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,500,700" rel="stylesheet">
+    {{ $style := resources.Get "css/main.scss" | toCSS | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+    <script src="https://kit.fontawesome.com/7148cf1c16.js" crossorigin="anonymous"></script>
+
+    <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+</head>
+<body>
+
+<div id="page-wrapper">
+   {{ block "main" . }}{{ end }}
+</div>
+
+{{ with .Site.Params.mastodon }}
+<a rel="me" style="visibility: hidden;" href="https://{{ . }}"></a>
+{{ end }}
+
+</body>
+</html>
