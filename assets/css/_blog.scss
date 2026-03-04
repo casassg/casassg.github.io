@@ -36,7 +36,14 @@ $border-color: #e0e0e0;
     font-weight: 600;
 }
 
-.back-link {
+.header-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.back-link,
+.rss-link {
     color: $accent-color;
     text-decoration: none;
     font-weight: 400;
@@ -44,6 +51,10 @@ $border-color: #e0e0e0;
     transition: color 0.3s;
 
     &:hover { color: $accent-hover; }
+}
+
+.rss-link {
+    .fa { margin-right: 0.25rem; }
 }
 
 // Language switcher
