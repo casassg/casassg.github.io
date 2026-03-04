@@ -1,0 +1,96 @@
+{{ define "main" }}
+{{/* Build a list of posts: prefer current language translation, fallback to default language */}}
+{{ $defaultSite := index site.Sites 0 }}
+{{ $defaultLang := $defaultSite.Language.Lang }}
+{{ $currentLang := .Language.Lang }}
+{{ $allPosts := slice }}
+
+{{/* Get all posts from the default language as the base */}}
+{{ $defaultPosts := where $defaultSite.RegularPages "Section" "blog" }}
+
+{{ range $defaultPosts }}
+    {{ $post := . }}
+    {{/* Check if there's a translation for the current language */}}
+    {{ if ne $currentLang $defaultLang }}
+        {{ range .Translations }}
+            {{ if eq .Language.Lang $currentLang }}
+                {{ $post = . }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+    {{ $allPosts = $allPosts | append $post }}
+{{ end }}
+
+{{/* Sort by date descending and paginate */}}
+{{ $allPosts = sort $allPosts "Date" "desc" }}
+{{ $paginator := .Paginate $allPosts }}
+
+<div class="blog-wrapper">
+    <div class="blog-container">
+        <header class="blog-header">
+            {{ if .IsTranslated }}
+            <div class="language-switcher">
+                {{ range .Translations }}
+                <a href="{{ .Permalink }}" class="language-link">{{ .Language.LanguageName }}</a>
+                {{ end }}
+            </div>
+            {{ end }}
+            <h1 class="blog-title">Blog</h1>
+            <a href="/" class="back-link">{{ i18n "back_to_home" }}</a>
+        </header>
+
+        <div class="posts-list">
+            {{ range $paginator.Pages }}
+            <article class="post-preview"{{ if ne .Language.Lang $currentLang }} lang="{{ .Language.Lang }}"{{ end }}>
+                <h2 class="post-title">
+                    {{ if .Params.link }}
+                    <a href="{{ .Params.link }}">
+                        {{ .Title }}
+                        <span class="external-icon" aria-hidden="true">↗</span>
+                    </a>
+                    {{ else }}
+                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                    {{ end }}
+                </h2>
+                <div class="post-meta">
+                    <a href="{{ .RelPermalink }}" class="post-date">
+                        <time datetime="{{ .Date.Format "2006-01-02" }}">
+                            {{ .Date | time.Format ":date_long" }}
+                        </time>
+                    </a>
+                    <span class="separator">·</span>
+                    <span class="reading-time">{{ .ReadingTime }} {{ i18n "min_read" }}</span>
+                    {{- if .IsTranslated }}
+                    {{ range .Translations }}
+                    <span class="separator">·</span>
+                    <a href="{{ .RelPermalink }}" class="translation-link">{{ .Language.LanguageName }}</a>
+                    {{- end }}
+                    {{- end }}
+                </div>
+                {{ if  eq .Params.style "note" }}
+                <div class="post-content">
+                    {{ .Content }}
+                </div>
+                {{ else if .Description }}
+                <p class="post-description">{{ .Description }}</p>
+                {{ end }}
+
+            </article>
+            {{ end }}
+        </div>
+
+        {{/* Pagination */}}
+        {{ if gt $paginator.TotalPages 1 }}
+        <nav class="pagination">
+            {{ if $paginator.HasPrev }}
+            <a href="{{ $paginator.Prev.URL }}" class="pagination-link pagination-prev">← {{ i18n "newer_posts" }}</a>
+            {{ end }}
+            <span class="pagination-info">{{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}</span>
+            {{ if $paginator.HasNext }}
+            <a href="{{ $paginator.Next.URL }}" class="pagination-link pagination-next">{{ i18n "older_posts" }} →</a>
+            {{ end }}
+        </nav>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

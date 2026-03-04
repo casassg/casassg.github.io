@@ -1,7 +1,22 @@
 baseURL: "https://gerard.space/"
-languageCode: "en-us"
 title: "Hey, my name is Gerard"
 disableKinds: ["taxonomy", "term"]
+defaultContentLanguage: "en"
+defaultContentLanguageInSubdir: false
+
+languages:
+  en:
+    languageCode: "en-us"
+    languageName: "English"
+    weight: 1
+  ca:
+    languageCode: "ca"
+    languageName: "Català"
+    weight: 2
+  es:
+    languageCode: "es"
+    languageName: "Español"
+    weight: 3
 
 params:
   author: "Gerard Casas Saez"
@@ -13,3 +28,9 @@ params:
     Follow me on [Threads](https://threads.net/@casassg) to stay updated on my latest adventures.
   twitter: "casassaez"
   mastodon: "macaw.social/@gerard"
+
+pagination:
+  pagerSize: 10
+
+permalinks:
+  blog: /:year/:month/:title/

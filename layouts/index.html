@@ -1,54 +1,19 @@
 {{ define "main" }}
 <div id="wrapper">
-	<section id="main">
-		<header>
-			<h1>{{ .Site.Title }}</h1>
-			<div class="separator"></div>
-			<p>{{ .Site.Params.description | markdownify }}</p>
-		</header>
-
-		<footer>
-			<div class="icons">
-				{{ range .Site.Data.social }}
-				<a target="_blank" href="{{ .link }}"
-					class="fa fa-3x fa-{{ index . "fa-icon" }} {{ if index . "fa-brand" }} fa-brands {{ end }}"><span
-						class="label">{{ .title }}</span></a>
-				{{ end }}
-				<a id="stats_button" href="#stats" class="fa fa-3x fa-chart-simple"><span class="label">Stats</span></a>
-
-			</div>
-		</footer>
-	</section>
-	<section id="back">
-		<h1>Stats</h1>
-		<h3>Activities for the past <span id="days_ago"></span> days</h3>
+	<header>
+		<h1>{{ .Site.Title }}</h1>
 		<div class="separator"></div>
-		<div class="box">
-			<div>
-				<h2 id="activity"></h2>
-				<p id="time_ago"></p>
-			</div>
-			<div>
-				<h2><span id="count"></span></h2>
-				<p>total activities</p>
-			</div>
-			<div>
-				<h2><span id="run_kms"></span></h2>
-				<p>kilometers run</p>
-			</div>
-			<div>
-				<h2><span id="speed"></span></h2>
-				<p>average min/km. run</p>
-			</div>
-		</div>
-		<footer>
-			<div class="icons">
-				<a id="close_stats" href="#closed" class="fa fa-2x fa-arrow-left"><span class="label">Back to
-						main</span></a>
-			</div>
-		</footer>
-	</section>
-	<script defer src="/assets/js/stats.js"></script>
+		<p>{{ .Site.Params.description | markdownify }}</p>
+	</header>
 
+	<footer>
+		<div class="icons">
+			{{ range .Site.Data.social }}
+			<a target="_blank" href="{{ .link }}"
+				class="fa fa-3x fa-{{ index . "fa-icon" }} {{ if index . "fa-brand" }} fa-brands {{ end }}"><span
+					class="label">{{ .title }}</span></a>
+			{{ end }}
+		</div>
+	</footer>
 </div>
 {{ end }}

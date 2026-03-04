@@ -21,6 +21,9 @@
 - title: LinkedIn
   link: https://linkedin.com/in/casassg
   fa-icon: linkedin
+- title: Blog
+  link: /blog/
+  fa-icon: newspaper
 - title: Resume
   link: /cv
   fa-icon: file-text

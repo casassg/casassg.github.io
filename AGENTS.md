@@ -11,6 +11,7 @@ Repository guidance for coding agents.
 - Data files: `data/`.
 - Build output: `public/`.
 - Tool bootstrap: Hermit (`bin/`).
+- Blog: `content/blog/` with multi-language support (EN/CA). Use `.ca.md` suffix for Catalan translations. Posts use date-based permalinks (`/2026/03/post-title/`).
 
 ## Setup
 1. Clone the repo.
