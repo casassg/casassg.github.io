@@ -1,6 +1,6 @@
 ---
 title: "On simplicity"
-date: 2026-03-02
+date: 2026-03-04
 style: note
 ---
 A good reminder given the current day and age we live in...
