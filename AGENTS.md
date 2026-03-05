@@ -35,7 +35,7 @@ source ./bin/activate-hermit   # or let direnv handle it via .envrc
 - **SCSS:** Edit `assets/css/` only. Theming via `--blog-*` CSS custom properties. Dark mode uses **both** `prefers-color-scheme` AND `[data-theme="dark"]` — keep in sync. Accent: `#2B546B` light / `#5b9bb5` dark. Use `rem` units. Responsive at `max-width: 700px`.
 - **JavaScript:** `assets/js/` — plain browser JS in IIFEs, processed via Hugo Pipes (minify/fingerprint). Referenced in `baseof.html` with `resources.Get`. Prefer `const`/`let`. Check element existence before access (`if (!btn) return;`).
 - **Config:** Keep `hugo.yml` valid YAML. `data/social.yml` entries: `title`, `link`, `fa-icon`, optional `fa-brand: true`. Keep `i18n/*.yaml` keys in sync across languages.
-- **Blog posts:** Filename `YYYY-MM-DD-slug.md`. Frontmatter: `title` (required), `description` (optional), `style: note` (optional), `link` (optional).
+- **Blog posts:** Filename `YYYY-MM-DD-slug.md`. Frontmatter: `title` (required), `description` (optional), `style: note` (optional), `link` (optional). **Notes** (`style: note`) are short-form posts (quotes, quick thoughts); they omit `description` and get the `blog-post--note` CSS class. **Regular posts** omit `style`, include `description`, and contain long-form content.
 - **Dependencies:** No module system. Use Hermit for binaries. Avoid new CDN/script deps.
 - **Errors:** Run `./bin/hugo --gc --minify` to verify. Use Hugo `default` to prevent nil panics.
 
