@@ -28,5 +28,3 @@ And then it happened. I went and talked with the same person that explained me t
 > Dilemmas are about how you look at them. There’s always a third option, and it will always be there. The only thing you got to do is go and find it.
 
 I hope this can help somebody, and get some sense in this matter. If not then I hope that at least you enjoyed as much reading this as I enjoyed writing it. Thanks for your time!
-
-Special thanks to María Gil for encouraging me to write this down and for the talk.

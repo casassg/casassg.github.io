@@ -39,6 +39,9 @@
             <div class="header-links">
                 <a href="/" class="back-link">{{ i18n "back_to_home" }}</a>
                 <a href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}" class="rss-link" title="RSS Feed"><i class="fa fa-rss" aria-hidden="true"></i> RSS</a>
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">
+                    <i class="fa-solid fa-moon" aria-hidden="true"></i>
+                </button>
             </div>
         </header>
 
