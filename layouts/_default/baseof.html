@@ -33,9 +33,8 @@
     <script src="https://kit.fontawesome.com/7148cf1c16.js" crossorigin="anonymous"></script>
 
     <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
-    <script>
-    (function(){var t=localStorage.getItem("theme");if(t){document.documentElement.setAttribute("data-theme",t)}})();
-    </script>
+    {{ $themeInit := resources.Get "js/theme-init.js" | minify | fingerprint }}
+    <script src="{{ $themeInit.RelPermalink }}" integrity="{{ $themeInit.Data.Integrity }}"></script>
 </head>
 <body>
 
@@ -47,42 +46,8 @@
 <a rel="me" style="visibility: hidden;" href="https://{{ . }}"></a>
 {{ end }}
 
-<script>
-(function() {
-    var btn = document.getElementById("theme-toggle");
-    if (!btn) return;
-
-    var icon = btn.querySelector("i");
-
-    function getEffectiveTheme() {
-        var stored = localStorage.getItem("theme");
-        if (stored) return stored;
-        return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    }
-
-    function updateIcon(theme) {
-        if (!icon) return;
-        icon.className = theme === "dark" ? "fa-solid fa-sun" : "fa-solid fa-moon";
-        btn.setAttribute("aria-label", theme === "dark" ? "Switch to light mode" : "Switch to dark mode");
-    }
-
-    updateIcon(getEffectiveTheme());
-
-    btn.addEventListener("click", function() {
-        var current = getEffectiveTheme();
-        var next = current === "dark" ? "light" : "dark";
-        document.documentElement.setAttribute("data-theme", next);
-        localStorage.setItem("theme", next);
-        updateIcon(next);
-    });
-
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function() {
-        if (!localStorage.getItem("theme")) {
-            updateIcon(getEffectiveTheme());
-        }
-    });
-})();
-</script>
+{{ $themeToggle := resources.Get "js/theme-toggle.js" | minify | fingerprint }}
+<script src="{{ $themeToggle.RelPermalink }}" integrity="{{ $themeToggle.Data.Integrity }}"></script>
 
 </body>
 </html>
