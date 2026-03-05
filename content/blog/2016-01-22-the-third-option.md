@@ -1,6 +1,5 @@
 ---
 title: "The Third Option"
-date: 2016-01-22
 description: "Dilemmas. Life is full of them. We need to make choices to grow, to accomplish our dreams. However dilemmas are not about which option is better, they are about our point of view."
 ---
 

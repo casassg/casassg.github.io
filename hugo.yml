@@ -32,5 +32,10 @@ params:
 pagination:
   pagerSize: 10
 
+frontmatter:
+  date:
+    - ":filename"
+    - ":default"
+
 permalinks:
   blog: /:year/:month/:title/
