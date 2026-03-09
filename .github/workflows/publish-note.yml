@@ -1,0 +1,62 @@
+name: Publish Note
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: "Title of the note"
+        required: true
+        type: string
+      link:
+        description: "Optional URL to link to"
+        required: false
+        type: string
+      description:
+        description: "Content body of the note (supports Markdown)"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Create note post
+        env:
+          NOTE_TITLE: ${{ inputs.title }}
+          NOTE_LINK: ${{ inputs.link }}
+          NOTE_DESCRIPTION: ${{ inputs.description }}
+        run: |
+          # Generate date and slug
+          DATE="$(date -u +%Y-%m-%d)"
+          SLUG="$(echo "$NOTE_TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-//;s/-$//')"
+          FILENAME="content/blog/${DATE}-${SLUG}.md"
+
+          # Build frontmatter
+          {
+            echo "---"
+            echo "title: \"${NOTE_TITLE}\""
+            echo "style: note"
+            if [ -n "$NOTE_LINK" ]; then
+              echo "link: \"${NOTE_LINK}\""
+            fi
+            echo "---"
+            echo "$NOTE_DESCRIPTION"
+          } > "$FILENAME"
+
+          echo "Created $FILENAME"
+
+      - name: Commit and push
+        env:
+          NOTE_TITLE: ${{ inputs.title }}
+        run: |
+          git add content/blog/
+          git commit -m "blog: add note \"${NOTE_TITLE}\""
+          git push
