@@ -64,8 +64,10 @@
                             {{ .Date | time.Format ":date_long" }}
                         </time>
                     </a>
+                    {{ if ne .Params.style "note" }}
                     <span class="separator">·</span>
                     <span class="reading-time">{{ .ReadingTime }} {{ i18n "min_read" }}</span>
+                    {{- end }}
                     {{- if .IsTranslated }}
                     {{ range .Translations }}
                     <span class="separator">·</span>
