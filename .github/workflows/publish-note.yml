@@ -57,6 +57,8 @@ jobs:
         env:
           NOTE_TITLE: ${{ inputs.title }}
         run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add content/blog/
           git commit -m "blog: add note \"${NOTE_TITLE}\""
           git push
