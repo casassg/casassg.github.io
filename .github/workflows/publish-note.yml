@@ -18,6 +18,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   publish:
@@ -62,3 +63,8 @@ jobs:
           git add content/blog/
           git commit -m "blog: add note \"${NOTE_TITLE}\""
           git push
+
+      - name: Trigger deploy
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run "Deploy Hugo to GitHub Pages" --ref main
