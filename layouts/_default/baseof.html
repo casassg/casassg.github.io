@@ -33,8 +33,6 @@
     <script src="https://kit.fontawesome.com/7148cf1c16.js" crossorigin="anonymous"></script>
 
     <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
-    {{ $themeInit := resources.Get "js/theme-init.js" | minify | fingerprint }}
-    <script src="{{ $themeInit.RelPermalink }}" integrity="{{ $themeInit.Data.Integrity }}"></script>
 </head>
 <body>
 
@@ -45,9 +43,6 @@
 {{ with .Site.Params.mastodon }}
 <a rel="me" style="visibility: hidden;" href="https://{{ . }}"></a>
 {{ end }}
-
-{{ $themeToggle := resources.Get "js/theme-toggle.js" | minify | fingerprint }}
-<script src="{{ $themeToggle.RelPermalink }}" integrity="{{ $themeToggle.Data.Integrity }}"></script>
 
 </body>
 </html>

@@ -6,15 +6,11 @@
 - title: GitHub
   link: https://github.com/casassg
   fa-icon: github
-- title: Twitter
-  link: https://twitter.com/casassaez
-  fa-icon: x-twitter
-  fa-brand: true
 - title: GoodReads
   link: http://goodreads.com/casassaez
   fa-icon: goodreads-g
   fa-brand: true
-- title: Instagram 
+- title: Instagram
   link: https://instagram.com/casassg
   fa-icon: instagram
   fa-brand: true
@@ -22,8 +18,8 @@
   link: https://linkedin.com/in/casassg
   fa-icon: linkedin
 - title: Blog
-  link: /blog/
-  fa-icon: newspaper
+  link: https://blog.gerard.space/
+  fa-icon: rss
 - title: Resume
   link: /cv
   fa-icon: file-text
