@@ -67,4 +67,4 @@ jobs:
       - name: Trigger deploy
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run "Deploy Hugo to GitHub Pages" --ref main
+        run: gh workflow run "Deploy Hugo to GitHub Pages" --ref master
